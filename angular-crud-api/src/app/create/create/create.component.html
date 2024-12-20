@@ -1,0 +1,27 @@
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4>Create Items
+                <a routerLink="/" class="btn btn-danger float-end">Back</a>
+            </h4>
+        </div>
+        <div class="card-body">
+            <form (ngSubmit)="storeData()">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" [(ngModel)]="title" name="title" id="title" class="form-control" required />
+                    <span *ngIf="errors.title" class="text-danger">{{errors.title}}</span>
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Content</label>
+                    <input type="text" [(ngModel)]="content" name="content" id="content" class="form-control"
+                        required />
+                    <span *ngIf="errors.content" class="text-danger">{{errors.content}}</span>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary w-100">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

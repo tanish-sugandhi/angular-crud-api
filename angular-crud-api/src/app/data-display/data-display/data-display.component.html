@@ -1,0 +1,51 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Data Management</h2>
+
+    <!-- Add Button -->
+    <button type="button" class="btn btn-info mb-4" routerLink="create">Add</button>
+
+    <!-- Form for Adding Product (Visible when 'showForm' is true) -->
+
+    <!-- Table to Show Products -->
+    <div *ngIf="!showForm">
+        <table class="table table-bordered table-hover table-striped text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">View More</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let d of data; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ d.title }}</td>
+                    <td>{{ d.content }}</td>
+                    <td><button class="btn btn-dark btn-sm" [routerLink]="['/update', d.id]">Update</button></td>
+
+                    <td><button class="btn btn-danger btn-sm" (click)="destroy(d.id)">Delete</button></td>
+                    <td><button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target=".bd-example-modal-sm" (click)="viewMore(d.id)" >View</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div *ngIf="selectedProduct" class="product-details-modal">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4>Category Details</h4>
+            <button [ngStyle]="{ float: 'right' }" class="btn-close btn-close-white" aria-label="Close" (click)="closeProductDetails()"></button>
+        </div>
+        <div class="card-body">
+            <p><strong>Title:</strong> {{ selectedProduct?.data?.title }}</p>
+            <p><strong>Content:</strong> {{ selectedProduct?.data?.content }}</p>
+            <img *ngIf="selectedProduct.data.image" [src]="selectedProduct.data.image" alt="Product Image" />
+            <p *ngIf="!selectedProduct.data.image">No image available for this Item.</p>
+            <button class="btn btn-secondary mt-3" (click)="closeProductDetails()">Close</button>
+        </div>
+    </div>
+</div>
